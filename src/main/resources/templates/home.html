@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Home</title>
+</head>
+<body>
+<h1>Roller Derby</h1>
+<h2>Played Games</h2>
+<table>
+	<tr>
+		<th>#</th>
+		<th>Date</th>
+		<th>Venue</th>
+		<th>Home Team</th>
+		<th>Visiting Team</th>
+		<th>Score</th>
+		<th>Score difference</th>
+	</tr>
+	<tr th:each = "game : ${games}">
+		<td th:text= "${game.id}"></td>
+		<td th:text= "${game.date}"></td>
+		<td th:text= "${game.venue}"></td>
+		<td th:text= "${game.homeTeam.name}"></td>
+		<td th:text= "${game.visitingTeam.name}"></td>
+		<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
+		<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
+	</tr>
+</table>
+</body>
+</html>

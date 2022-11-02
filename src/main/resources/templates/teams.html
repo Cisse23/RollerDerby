@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Teams</title>
+</head>
+<body>
+<h1>All teams</h1>
+<table>
+	<tr>
+		<th>Team name</th>
+		<th>Acronym</th>
+		<th>City</th>
+	</tr>
+	<tr th:each = "team : ${teams}">
+		<td th:text= "${team.name}"></td>
+		<td th:text= "${team.acronym}"></td>
+		<td th:text= "${team.city}"></td>
+	</tr>
+</table>
+</body>
+</html>
