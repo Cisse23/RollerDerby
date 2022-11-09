@@ -1,40 +1,42 @@
 package cb.swd20.RollerDerby.webcontroller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cb.swd20.RollerDerby.domain.Team;
+import cb.swd20.RollerDerby.domain.TeamRepository;
 
 @Controller
 public class TeamController {
+	@Autowired
+	private TeamRepository teamRepo;
 	
 	@RequestMapping(value = "/teams")
 	public String listTeams(Model model) {
-		Team team1 = new Team("Helsinki Roller Derby", "HRD", "Helsinki");
-		Team team2 = new Team("Kallio Rolling Rainbow", "KRR", "Helsinki");
-		Team team3 = new Team("Oulu Roller Derby", "ORD", "Oulu");
-		Team team4 = new Team("Riverdale Rollers", "RDR", "Ylivieska");
-		Team team5 = new Team("Tampere Roller Derby", "TRD", "Tampere");
 		
-		List<Team> teams = new ArrayList<>();
-		teams.add(team1);
-		teams.add(team2);
-		teams.add(team3);
-		teams.add(team4);
-		teams.add(team5);
-		
-		model.addAttribute("teams", teams);
-		return "teams"; //return teams.html
+		model.addAttribute("teams", teamRepo.findAll());
+		return "teams"; //return http://localhost:8080/teams
 	}
 	
 	@RequestMapping(value = "/addteam")
-	public String addTeam() {
+	public String addTeam(Model model) {
+		model.addAttribute("team", new Team());
 		return "addteam"; //return addteam.html
 	}
-
 	
+	@RequestMapping(value = "/saveteam", method = RequestMethod.POST)
+	public String saveTeam(Team team) {
+		teamRepo.save(team);
+		return "redirect:teams";
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteTeam(@PathVariable("id") Long id, Model model) {
+		teamRepo.deleteById(id);
+		return "redirect:../teams";
+	}
 }
