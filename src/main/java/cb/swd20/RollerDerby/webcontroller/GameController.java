@@ -23,10 +23,25 @@ public class GameController {
 		
 		Game game1 = new Game((long) 1, "22.10.2022.", "Pasilan urheiluhalli", team3, team5, 56, 151);
 		Game game2 = new Game((long) 2, "22.10.2022.", "Pasilan urheiluhalli", team1, team4, 406, 40);
+		Game game3 = new Game((long) 2, "17.12.2022.", "Tampere", team5, team2, 0, 0);
+		Game game4 = new Game((long) 2, "17.12.2022.", "Tampere", team3, team1, 0, 0);
+		Game game5 = new Game((long) 2, "21.01.2023.", "Oulu", team4, team3, 0, 0);
+		Game game6 = new Game((long) 2, "21.01.2023.", "Oulu", team1, team5, 0, 0);
+		Game game7 = new Game((long) 2, "21.01.2023.", "Oulu", team3, team2, 0, 0);
+		Game game8 = new Game((long) 2, "04.03.2023.", "Pasilan urheiluhalli", team2, team1, 0, 0);
+		Game game9 = new Game((long) 2, "04.03.2023.", "Pasilan urheiluhalli", team5, team4, 0, 0);
+		
 		
 		List<Game> games = new ArrayList<>();
 		games.add(game1);
 		games.add(game2);
+		games.add(game3);
+		games.add(game4);
+		games.add(game5);
+		games.add(game6);
+		games.add(game7);
+		games.add(game8);
+		games.add(game9);
 		
 		model.addAttribute("games", games);
 		return "home"; //return home.html

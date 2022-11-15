@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>Add Team</h1>
+<div>
+	<form th:object="${team}" th:action="@{/saveteam}" action="#" method="post">
+	</form>
+</div>
+
 <table>
 	<tr>
 		<th>Team name</th>

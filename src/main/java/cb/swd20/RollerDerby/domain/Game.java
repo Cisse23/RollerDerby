@@ -32,6 +32,8 @@ public class Game {
 		this.scoreVisitingTeam = 0;
 	}
 
+	
+
 	public Long getId() {
 		return id;
 	}
