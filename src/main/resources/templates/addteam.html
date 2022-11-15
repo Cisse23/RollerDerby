@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Roller Derby Games | Teams</title>
+<title>Roller Derby Games | Add Team</title>
 </head>
 <body>
 <h1>Add Team</h1>
 <div>
+
 	<form th:object="${team}" th:action="@{/saveteam}" action="#" method="post">
 		<label for="name">Team name</label>
 		<input type="text" id="name" th:field="*{name}" />
@@ -16,6 +17,8 @@
 		
 		<label for="city">City</label>
 		<input type="text" id="city" th:field="*{city}" />
+		
+		<input type="submit" value="Save"></input>
 		
 	</form>
 </div>
