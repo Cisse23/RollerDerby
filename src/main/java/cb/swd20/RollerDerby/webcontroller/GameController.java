@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cb.swd20.RollerDerby.domain.Game;
 import cb.swd20.RollerDerby.domain.GameRepository;
@@ -30,6 +31,12 @@ public class GameController {
 		model.addAttribute("game", new Game());
 		model.addAttribute("teams", teamRepo.findAll());
 		return "addgame"; //return addgame.html
+	}
+	
+	@RequestMapping(value = "/savegame", method = RequestMethod.POST)
+	public String saveGame(Game game) {
+		gameRepo.save(game);
+		return "redirect:/";
 	}
 
 }
