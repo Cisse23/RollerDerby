@@ -18,7 +18,6 @@ public class Team {
 	
 	public Team(String name, String acronym, String city) {
 		super();
-		//this.id = id;
 		this.name = name;
 		this.acronym = acronym;
 		this.city = city;
@@ -47,9 +46,6 @@ public class Team {
 		return city;
 	}
 
-	//public void setId(Long id) {
-	//	this.id = id;
-	//}
 
 	public void setName(String name) {
 		this.name = name;

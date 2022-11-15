@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import cb.swd20.RollerDerby.domain.Game;
+import cb.swd20.RollerDerby.domain.GameRepository;
 import cb.swd20.RollerDerby.domain.Team;
 import cb.swd20.RollerDerby.domain.TeamRepository;
 
@@ -25,7 +27,7 @@ public class RollerDerbyApplication {
 	
 	//Luodaan testidataa H2-tietokantaan
 	@Bean
-	public CommandLineRunner testData(TeamRepository teamRepo) {
+	public CommandLineRunner testData(TeamRepository teamRepo, GameRepository gameRepo) {
 		return(args) -> {
 			log.info("Save some teams to the DB");
 			teamRepo.save(new Team("Helsinki Roller Derby", "HRDB", "Helsinki"));
@@ -33,6 +35,17 @@ public class RollerDerbyApplication {
 			teamRepo.save(new Team("Oulu Roller Derby", "ORD", "Oulu"));
 			teamRepo.save(new Team("Riverdale Rollers", "RDR", "Ylivieska"));
 			teamRepo.save(new Team("Tampere Roller Derby", "TRDA", "Tampere"));
+			
+			log.info("Save some games to the DB");
+			gameRepo.save(new Game("22.10.2022.", "Pasilan urheiluhalli", teamRepo.findByAcronym("ORD").get(0) , teamRepo.findByAcronym("TRDA").get(0), 56, 151));
+			gameRepo.save(new Game("22.10.2022.", "Pasilan urheiluhalli", teamRepo.findByAcronym("HRDB").get(0) , teamRepo.findByAcronym("RDR").get(0), 406, 40));
+			gameRepo.save(new Game("17.12.2022.", "Tampere", teamRepo.findByAcronym("TRDA").get(0), teamRepo.findByAcronym("KRR").get(0), 0, 0));
+			gameRepo.save(new Game("17.12.2022.", "Tampere", teamRepo.findByAcronym("ORD").get(0), teamRepo.findByAcronym("HRDB").get(0), 0, 0));
+			gameRepo.save(new Game("21.01.2023.", "Oulu", teamRepo.findByAcronym("RDR").get(0), teamRepo.findByAcronym("ORD").get(0), 0, 0));
+			gameRepo.save(new Game("21.01.2023.", "Oulu", teamRepo.findByAcronym("HRDB").get(0), teamRepo.findByAcronym("TRDA").get(0), 0, 0));
+			gameRepo.save(new Game("21.01.2023.", "Oulu", teamRepo.findByAcronym("ORD").get(0), teamRepo.findByAcronym("KRR").get(0), 0, 0));
+			gameRepo.save(new Game("04.03.2023.", "Pasilan urheiluhalli", teamRepo.findByAcronym("KRR").get(0), teamRepo.findByAcronym("HRDB").get(0), 0, 0));
+			gameRepo.save(new Game("04.03.2023.", "Pasilan urheiluhalli", teamRepo.findByAcronym("TRDA").get(0), teamRepo.findByAcronym("RDR").get(0), 0, 0));
 
 		};
 	}

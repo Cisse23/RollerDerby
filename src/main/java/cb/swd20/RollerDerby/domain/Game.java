@@ -1,18 +1,31 @@
 package cb.swd20.RollerDerby.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Game {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String date;
 	private String venue;
+	@OneToOne
+	@JoinColumn(name = "id")
 	private Team homeTeam;
+	@OneToOne
+	@JoinColumn(name = "id")
 	private Team visitingTeam;
 	private int scoreHomeTeam;
 	private int scoreVisitingTeam;
 	
-	public Game(Long id, String date, String venue, Team homeTeam, Team visitingTeam, int scoreHomeTeam,
+	public Game(String date, String venue, Team homeTeam, Team visitingTeam, int scoreHomeTeam,
 			int scoreVisitingTeam) {
 		super();
-		this.id = id;
 		this.date = date;
 		this.venue = venue;
 		this.homeTeam = homeTeam;
@@ -23,7 +36,6 @@ public class Game {
 	
 	public Game() {
 		super();
-		this.id = null;
 		this.date = null;
 		this.venue = null;
 		this.homeTeam = null;
@@ -31,8 +43,6 @@ public class Game {
 		this.scoreHomeTeam = 0;
 		this.scoreVisitingTeam = 0;
 	}
-
-	
 
 	public Long getId() {
 		return id;

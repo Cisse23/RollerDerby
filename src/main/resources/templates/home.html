@@ -22,8 +22,8 @@
 			<td th:text= "${game.id}"></td>
 			<td th:text= "${game.date}"></td>
 			<td th:text= "${game.venue}"></td>
-			<td th:text= "${game.homeTeam.name}"></td>
-			<td th:text= "${game.visitingTeam.name}"></td>
+			<td th:text= "${game.homeTeam?.name}"></td>
+			<td th:text= "${game.visitingTeam?.name}"></td>
 			<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
 			<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
 		</th:block>
@@ -45,8 +45,8 @@
 			<td th:text= "${game.id}"></td>
 			<td th:text= "${game.date}"></td>
 			<td th:text= "${game.venue}"></td>
-			<td th:text= "${game.homeTeam.name}"></td>
-			<td th:text= "${game.visitingTeam.name}"></td>
+			<td th:text= "${game.homeTeam?.name}"></td>
+			<td th:text= "${game.visitingTeam?.name}"></td>
 		</th:block>
 
 	</tr>
