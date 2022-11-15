@@ -19,6 +19,7 @@
 		<th>Visiting Team</th>
 		<th>Score</th>
 		<th>Score difference</th>
+		<th>Delete</th>
 	</tr>
 	<tr th:each = "game : ${games}">
 		<th:block th:unless="${game.scoreHomeTeam}-${game.scoreVisitingTeam} == 0">
@@ -29,6 +30,7 @@
 			<td th:text= "${game.visitingTeam?.name}"></td>
 			<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
 			<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
+			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 	</tr>
 </table>
@@ -41,6 +43,7 @@
 		<th>Venue</th>
 		<th>Home Team</th>
 		<th>Visiting Team</th>
+		<th>Delete</th>
 
 	</tr>
 	<tr th:each = "game : ${games}">
@@ -50,6 +53,7 @@
 			<td th:text= "${game.venue}"></td>
 			<td th:text= "${game.homeTeam?.name}"></td>
 			<td th:text= "${game.visitingTeam?.name}"></td>
+			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 
 	</tr>
