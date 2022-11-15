@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Game {
@@ -14,11 +16,14 @@ public class Game {
 	private Long id;
 	private String date;
 	private String venue;
-	@OneToOne
-	@JoinColumn(name = "id")
+	@ManyToOne
+	@JsonIgnoreProperties("games")
+	@JoinColumn(name = "homeTeam_id", referencedColumnName = "id")
 	private Team homeTeam;
-	@OneToOne
-	@JoinColumn(name = "id")
+	
+	@ManyToOne
+	@JsonIgnoreProperties("games")
+	@JoinColumn(name = "visitingTeam_id", referencedColumnName = "id")
 	private Team visitingTeam;
 	private int scoreHomeTeam;
 	private int scoreVisitingTeam;

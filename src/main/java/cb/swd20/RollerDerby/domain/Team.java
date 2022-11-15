@@ -1,9 +1,15 @@
 package cb.swd20.RollerDerby.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Team {
@@ -14,6 +20,10 @@ public class Team {
 	private String name;
 	private String acronym;
 	private String city;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "homeTeam")
+	@JsonIgnoreProperties("homeTeam")
+	private List<Game> games;
 	
 	
 	public Team(String name, String acronym, String city) {
