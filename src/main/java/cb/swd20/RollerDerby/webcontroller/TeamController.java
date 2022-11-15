@@ -27,11 +27,6 @@ public class TeamController {
 		model.addAttribute("team", new Team());
 		return "addteam"; //return addteam.html
 	}
-<<<<<<< HEAD
-	
-
-=======
->>>>>>> 74899b74adfbd59e4909a2493b79f910a1049374
 	
 	@RequestMapping(value = "/saveteam", method = RequestMethod.POST)
 	public String saveTeam(Team team) {
