@@ -23,13 +23,13 @@ public class GameController {
 		
 		Game game1 = new Game((long) 1, "22.10.2022.", "Pasilan urheiluhalli", team3, team5, 56, 151);
 		Game game2 = new Game((long) 2, "22.10.2022.", "Pasilan urheiluhalli", team1, team4, 406, 40);
-		Game game3 = new Game((long) 2, "17.12.2022.", "Tampere", team5, team2, 0, 0);
-		Game game4 = new Game((long) 2, "17.12.2022.", "Tampere", team3, team1, 0, 0);
-		Game game5 = new Game((long) 2, "21.01.2023.", "Oulu", team4, team3, 0, 0);
-		Game game6 = new Game((long) 2, "21.01.2023.", "Oulu", team1, team5, 0, 0);
-		Game game7 = new Game((long) 2, "21.01.2023.", "Oulu", team3, team2, 0, 0);
-		Game game8 = new Game((long) 2, "04.03.2023.", "Pasilan urheiluhalli", team2, team1, 0, 0);
-		Game game9 = new Game((long) 2, "04.03.2023.", "Pasilan urheiluhalli", team5, team4, 0, 0);
+		Game game3 = new Game((long) 3, "17.12.2022.", "Tampere", team5, team2, 0, 0);
+		Game game4 = new Game((long) 4, "17.12.2022.", "Tampere", team3, team1, 0, 0);
+		Game game5 = new Game((long) 5, "21.01.2023.", "Oulu", team4, team3, 0, 0);
+		Game game6 = new Game((long) 6, "21.01.2023.", "Oulu", team1, team5, 0, 0);
+		Game game7 = new Game((long) 7, "21.01.2023.", "Oulu", team3, team2, 0, 0);
+		Game game8 = new Game((long) 8, "04.03.2023.", "Pasilan urheiluhalli", team2, team1, 0, 0);
+		Game game9 = new Game((long) 9, "04.03.2023.", "Pasilan urheiluhalli", team5, team4, 0, 0);
 		
 		
 		List<Game> games = new ArrayList<>();

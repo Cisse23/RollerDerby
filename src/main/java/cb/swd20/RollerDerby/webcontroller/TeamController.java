@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cb.swd20.RollerDerby.domain.Team;
 
@@ -35,6 +36,7 @@ public class TeamController {
 	public String addTeam() {
 		return "addteam"; //return addteam.html
 	}
+	
 
 	
 }

@@ -8,6 +8,15 @@
 <h1>Add Team</h1>
 <div>
 	<form th:object="${team}" th:action="@{/saveteam}" action="#" method="post">
+		<label for="name">Team name</label>
+		<input type="text" id="name" th:field="*{name}" />
+		
+		<label for="acronym">Acronym</label>
+		<input type="text" id="acronym" th:field="*{acronym}" />
+		
+		<label for="city">City</label>
+		<input type="text" id="city" th:field="*{city}" />
+		
 	</form>
 </div>
 
