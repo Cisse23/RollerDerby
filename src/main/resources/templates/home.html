@@ -7,6 +7,10 @@
 <body>
 
 <h1>Roller Derby</h1>
+<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
+	<form th:action="@{/logout}" method="post">
+		<input class="btn btn-sm btn-danger" type="submit" value="Sign Out"/>
+	</form>
 <a href="/teams">Show all teams</a> <a href="/addgame">Add games</a>
 
 <h2>Played Games</h2>

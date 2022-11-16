@@ -11,6 +11,8 @@ import cb.swd20.RollerDerby.domain.Game;
 import cb.swd20.RollerDerby.domain.GameRepository;
 import cb.swd20.RollerDerby.domain.Team;
 import cb.swd20.RollerDerby.domain.TeamRepository;
+import cb.swd20.RollerDerby.domain.User;
+import cb.swd20.RollerDerby.domain.UserRepository;
 
 @SpringBootApplication
 public class RollerDerbyApplication {
@@ -27,7 +29,7 @@ public class RollerDerbyApplication {
 	
 	//Luodaan testidataa H2-tietokantaan
 	@Bean
-	public CommandLineRunner testData(TeamRepository teamRepo, GameRepository gameRepo) {
+	public CommandLineRunner testData(TeamRepository teamRepo, GameRepository gameRepo, UserRepository userRepo) {
 		return(args) -> {
 			log.info("Save some teams to the DB");
 			teamRepo.save(new Team("Helsinki Roller Derby", "HRDB", "Helsinki"));
@@ -46,7 +48,10 @@ public class RollerDerbyApplication {
 			gameRepo.save(new Game("21.01.2023.", "Oulu", teamRepo.findByAcronym("ORD").get(0), teamRepo.findByAcronym("KRR").get(0), 0, 0));
 			gameRepo.save(new Game("04.03.2023.", "Pasilan urheiluhalli", teamRepo.findByAcronym("KRR").get(0), teamRepo.findByAcronym("HRDB").get(0), 0, 0));
 			gameRepo.save(new Game("04.03.2023.", "Pasilan urheiluhalli", teamRepo.findByAcronym("TRDA").get(0), teamRepo.findByAcronym("RDR").get(0), 0, 0));
-
+			
+			log.info("Save some users to  the DB");
+			userRepo.save(new User("Admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN"));
+			userRepo.save(new User("Pekka", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER", teamRepo.findByAcronym("HRDB").get(0)));
 		};
 	}
 }

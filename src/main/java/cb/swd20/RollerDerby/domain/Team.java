@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,6 +25,9 @@ public class Team {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "homeTeam")
 	@JsonIgnoreProperties("homeTeam")
 	private List<Game> games;
+	
+	@OneToOne(mappedBy = "team")
+	private User user;
 	
 	
 	public Team(String name, String acronym, String city) {
