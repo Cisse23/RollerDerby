@@ -23,6 +23,7 @@
 		<th>Visiting Team</th>
 		<th>Score</th>
 		<th>Score difference</th>
+		<th>Edit</th>
 		<th>Delete</th>
 	</tr>
 	<tr th:each = "game : ${games}">
@@ -34,6 +35,7 @@
 			<td th:text= "${game.visitingTeam?.name}"></td>
 			<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
 			<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
+			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
 			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 	</tr>
@@ -47,6 +49,7 @@
 		<th>Venue</th>
 		<th>Home Team</th>
 		<th>Visiting Team</th>
+		<th>Edit</th>
 		<th>Delete</th>
 
 	</tr>
@@ -57,6 +60,7 @@
 			<td th:text= "${game.venue}"></td>
 			<td th:text= "${game.homeTeam?.name}"></td>
 			<td th:text= "${game.visitingTeam?.name}"></td>
+			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
 			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 

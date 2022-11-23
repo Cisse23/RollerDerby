@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Edit Game</title>
+</head>
+<body>
+<h1>Edit Game</h1>
+<div>
+
+	<form th:object="${game}" th:action="@{/savegame}" action="#" method="post">
+		<input type="hidden" th:field="*{id}" />
+		
+		<label for="date">Date</label>
+		<input type="text" id="date" th:field="*{date}" />
+		
+		<label for="venue">Venue</label>
+		<input type="text" id="venue" th:field="*{venue}" />
+		<br>
+		<!-- Home Team Selection -->
+		<label for="homeTeam">Home Team</label>
+		<select id="homeTeam" th:field="*{homeTeam}" class="form-control">
+			<option th:each="team: ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+		</select>
+		
+		<!-- Visiting Team Selection -->
+		<label for="visitingTeam">Visiting Team</label>
+		<select id="visitingTeam" th:field="*{visitingTeam}" class="form-control">
+			<option th:each="team: ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+		</select>
+		<br>
+		<label for="scoreHomeTeam">Home Team Score</label>
+		<input type="text" id="scoreHomeTeam" th:field="*{scoreHomeTeam}" />
+		
+		<label for="scoreVisitingTeam">Visiting Team Score</label>
+		<input type="text" id="scoreVisitingTeam" th:field="*{scoreVisitingTeam}" />
+		
+		<input type="submit" value="Save"></input>
+		
+	</form>
+	<a href="/">return</a>
+</div>
+
+
+</body>
+</html>

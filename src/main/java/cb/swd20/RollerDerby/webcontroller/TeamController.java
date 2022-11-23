@@ -40,7 +40,14 @@ public class TeamController {
 		teamRepo.save(team);
 		return "redirect:teams";
 	}
+	
 
+	@RequestMapping(value="/editteam/{id}")
+	public String editTeam(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("team", teamRepo.findById(id));
+		return "editteam";
+	}
+	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteTeam(@PathVariable("id") Long id, Model model) {
 		teamRepo.deleteById(id);
@@ -48,10 +55,6 @@ public class TeamController {
 	}
 	
 	
-	@GetMapping(value="/editteam/{id}")
-	public String editTeam(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("team", teamRepo.findById(id));
-		return "editteam";
-	}
+
 	
 }

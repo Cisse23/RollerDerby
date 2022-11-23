@@ -40,6 +40,13 @@ public class GameController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/editgame/{id}")
+	public String editGame(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("game", gameRepo.findById(id));
+		model.addAttribute("teams", teamRepo.findAll());
+		return "editgame";
+	}
+	
 	@RequestMapping(value = "/deletegame/{id}", method = RequestMethod.GET)
 	public String deleteGame(@PathVariable("id") Long gameId, Model model) {
 		gameRepo.deleteById(gameId);

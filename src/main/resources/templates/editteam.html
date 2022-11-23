@@ -8,9 +8,9 @@
 <h1>Edit Team</h1>
 <div>
 
-	<form th:object="${team}" th:action="@{/saveteam}" action="#" method="post">
-		<label for="id">Id</label>
-		<input th:field="*{id}" readonly="readonly" placeholder="*{id}"/>
+	<form th:object="${team}" th:action="@{../saveteam}" action="#" method="post">
+		
+		<input type="hidden" th:field="*{id}" />
 		<br>
 		
 		<label for="name">Team name</label>
@@ -31,3 +31,8 @@
 
 </body>
 </html>
+
+<!-- 
+<label for="id">Id</label>
+<input type="hidden" id="id" th:field="*{id}" readonly="readonly" placeholder="*{id}"/>
+ -->
