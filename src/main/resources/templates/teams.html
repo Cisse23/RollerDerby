@@ -11,13 +11,16 @@
 		<th>Team name</th>
 		<th>Acronym</th>
 		<th>City</th>
+		<th>Edit</th>
 		<th>Delete</th>
 	</tr>
 	<tr th:each = "team : ${teams}">
 		<td th:text= "${team.name}"></td>
 		<td th:text= "${team.acronym}"></td>
 		<td th:text= "${team.city}"></td>
+		<td><a th:href="@{/editteam/{id}(id=${team.id})}">E</a>
 		<td><a th:href="@{/delete/{id}(id=${team.id})}">x</a></td>
+		
 	</tr>
 </table>
 <a href="/addteam">Add Team</a> <a href="/">return</a>

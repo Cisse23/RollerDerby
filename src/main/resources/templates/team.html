@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Teams</title>
+</head>
+<body>
+<h1 th:text= "${team.name}">Team name</h1>
+<h3 th:text= "${team.accronym}">acronym></h3>
+<h2 th:text= "City: ${team.city}"></h2>
+<br>
+<a href="/editteam">Edit Team</a> <a href="/">return</a>
+
+</body>
+</html>

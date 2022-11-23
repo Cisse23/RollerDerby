@@ -37,6 +37,14 @@ public class Team {
 		this.city = city;
 	}
 	
+	public Team(Long id, String name, String acronym, String city) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.acronym = acronym;
+		this.city = city;
+	}
+	
 	public Team() {
 		super();
 		this.name = null;

@@ -30,6 +30,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception{
 		http
 		.authorizeRequests()
+		.antMatchers("/", "home").permitAll()
 		.antMatchers("/delete/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated()
 		.and()
