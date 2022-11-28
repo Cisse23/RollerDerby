@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Roller Derby Games | Home</title>
@@ -24,7 +24,7 @@
 		<th>Score</th>
 		<th>Score difference</th>
 		<th>Edit</th>
-		<th>Delete</th>
+		<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
 	</tr>
 	<tr th:each = "game : ${games}">
 		<th:block th:unless="${game.scoreHomeTeam}-${game.scoreVisitingTeam} == 0">
@@ -36,7 +36,7 @@
 			<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
 			<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
 			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
-			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 	</tr>
 </table>
@@ -50,7 +50,7 @@
 		<th>Home Team</th>
 		<th>Visiting Team</th>
 		<th>Edit</th>
-		<th>Delete</th>
+		<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
 
 	</tr>
 	<tr th:each = "game : ${games}">
@@ -61,7 +61,7 @@
 			<td th:text= "${game.homeTeam?.name}"></td>
 			<td th:text= "${game.visitingTeam?.name}"></td>
 			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
-			<td><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 
 	</tr>

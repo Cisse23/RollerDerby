@@ -39,6 +39,7 @@ public class WebSecurityConfig {
 		.permitAll()
 		.and()
 	.logout()
+		//.logoutSuccessUrl("/")
 		.permitAll()
 		.and()
 	.httpBasic();

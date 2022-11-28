@@ -45,8 +45,25 @@ public class TeamController {
 	@RequestMapping(value="/editteam/{id}")
 	public String editTeam(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("team", teamRepo.findById(id));
+		//UserDetailServiceImpl user = (UserDetailServiceImpl) principal;
+		
+		//if((principal.team.getId()).equals(id))
 		return "editteam";
 	}
+	
+	/*
+	@RestController
+	public class UserController {
+    @RequestMapping(method = RequestMethod.PUT, path = "/user/{userId}", ...)
+    public UserDetails updateUserDetails(@PathVariable("userId") String userId, Principal principal) {
+
+        CustomUserDetails userDetails = (CustomUserDetails) principal;
+        if (userDetails.getUserId().equals(userId)) {
+            // Update the user
+        }
+    }}
+}
+	*/
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteTeam(@PathVariable("id") Long id, Model model) {
