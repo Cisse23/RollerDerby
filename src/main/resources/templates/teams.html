@@ -18,8 +18,8 @@
 		<td th:text= "${team.name}"></td>
 		<td th:text= "${team.acronym}"></td>
 		<td th:text= "${team.city}"></td>
-		<td><a th:href="@{/editteam/{id}(id=${team.id})}">E</a>
-		<td><a th:href="@{/delete/{id}(id=${team.id})}">x</a></td>
+		<td sec:authorize="isAuthenticated()"><a th:href="@{/editteam/{id}(id=${team.id})}">E</a>
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${team.id})}">x</a></td>
 		
 	</tr>
 </table>

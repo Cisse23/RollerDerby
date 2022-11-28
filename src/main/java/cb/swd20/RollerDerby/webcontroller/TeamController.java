@@ -1,20 +1,26 @@
 package cb.swd20.RollerDerby.webcontroller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cb.swd20.RollerDerby.domain.Team;
 import cb.swd20.RollerDerby.domain.TeamRepository;
+import cb.swd20.RollerDerby.domain.User;
+import cb.swd20.RollerDerby.domain.UserRepository;
 
 @Controller
 public class TeamController {
 	@Autowired
 	private TeamRepository teamRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@RequestMapping(value = "/teams")
 	public String listTeams(Model model) {	
@@ -43,27 +49,29 @@ public class TeamController {
 	
 
 	@RequestMapping(value="/editteam/{id}")
-	public String editTeam(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("team", teamRepo.findById(id));
-		//UserDetailServiceImpl user = (UserDetailServiceImpl) principal;
+	public String editTeam(@PathVariable("id") Long id, Model model, Principal principal) {
+		User currentUser = userRepo.findByUsername(principal.getName());
 		
-		//if((principal.team.getId()).equals(id))
-		return "editteam";
+		//Admin can edit any team
+		if(currentUser.getRole().equals("ADMIN")) {
+			model.addAttribute("team", teamRepo.findById(id));
+			
+			return "editteam";
+		}
+		else {
+			//User can edit their own team
+			Team userTeam = currentUser.getTeam();
+			if(id == userTeam.getId()) {
+				model.addAttribute("team", teamRepo.findById(id));
+				
+				return "editteam";
+			}
+			else {
+				return "redirect:/teams";
+			}
+		}		
 	}
 	
-	/*
-	@RestController
-	public class UserController {
-    @RequestMapping(method = RequestMethod.PUT, path = "/user/{userId}", ...)
-    public UserDetails updateUserDetails(@PathVariable("userId") String userId, Principal principal) {
-
-        CustomUserDetails userDetails = (CustomUserDetails) principal;
-        if (userDetails.getUserId().equals(userId)) {
-            // Update the user
-        }
-    }}
-}
-	*/
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteTeam(@PathVariable("id") Long id, Model model) {

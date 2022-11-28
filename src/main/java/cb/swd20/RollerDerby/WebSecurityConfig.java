@@ -30,8 +30,9 @@ public class WebSecurityConfig {
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception{
 		http
 		.authorizeRequests()
-		.antMatchers("/", "home").permitAll()
-		.antMatchers("/delete/**").hasAuthority("ADMIN")
+		.antMatchers("/", "/home", "/teams").permitAll()
+		.antMatchers("/delete/**", "/addteam", "/addgame").hasAuthority("ADMIN")
+		.antMatchers("/editteam/**", "/editgame/**").hasAnyAuthority("ADMIN", "USER")
 		.anyRequest().authenticated()
 		.and()
 	.formLogin()

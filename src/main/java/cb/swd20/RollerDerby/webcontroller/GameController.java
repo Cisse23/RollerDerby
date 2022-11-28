@@ -1,5 +1,8 @@
 package cb.swd20.RollerDerby.webcontroller;
 
+import java.security.Principal;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cb.swd20.RollerDerby.domain.Game;
 import cb.swd20.RollerDerby.domain.GameRepository;
+import cb.swd20.RollerDerby.domain.Team;
 import cb.swd20.RollerDerby.domain.TeamRepository;
+import cb.swd20.RollerDerby.domain.User;
+import cb.swd20.RollerDerby.domain.UserRepository;
 
 @Controller
 public class GameController {
@@ -19,6 +25,9 @@ public class GameController {
 	
 	@Autowired
 	private TeamRepository teamRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@RequestMapping("/")
 	public String homePage(Model model){
@@ -40,11 +49,39 @@ public class GameController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/username", method = RequestMethod.GET)
+	public String getCurrentUserTeam(Principal principal) {
+		return principal.getName();
+	}
+	
+	
 	@RequestMapping(value="/editgame/{id}")
-	public String editGame(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("game", gameRepo.findById(id));
-		model.addAttribute("teams", teamRepo.findAll());
-		return "editgame";
+	public String editGame(@PathVariable("id") Long id, Model model, Principal principal) {
+		User currentUser = userRepo.findByUsername(principal.getName());
+		Optional<Game> game = gameRepo.findById(id);
+		//Admin can edit all games
+		if(currentUser.getRole().equals("ADMIN")) {
+			model.addAttribute("game", gameRepo.findById(id));
+			model.addAttribute("teams", teamRepo.findAll());
+			
+			return "editgame";
+		}
+		else {
+			//User can edit a game if their team is the homeTeam
+			Team userTeam = currentUser.getTeam();
+			if(game.get().getHomeTeam().getId() == userTeam.getId()) {
+				model.addAttribute("game", gameRepo.findById(id));
+				model.addAttribute("teams", teamRepo.findAll());
+				return "editgame";
+			}
+			else {
+				//tried to display an error message, but it's not working
+				String message = "Access denied";
+				model.addAttribute("message", message);
+				return "redirect:/";
+			}
+		}
+
 	}
 	
 	@RequestMapping(value = "/deletegame/{id}", method = RequestMethod.GET)

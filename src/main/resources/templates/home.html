@@ -9,9 +9,14 @@
 <h1>Roller Derby</h1>
 <h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
 	<form th:action="@{/logout}" method="post">
-		<input class="btn btn-sm btn-danger" type="submit" value="Sign Out"/>
+		<input sec:authorize="isAuthenticated()" type="submit" value="Sign Out"/>
 	</form>
-<a href="/teams">Show all teams</a> <a href="/addgame">Add games</a>
+		<a href="/login" sec:authorize="isAnonymous()"> Log in</a>
+		<br>
+<a href="/teams">Show all teams</a> <a href="/addgame" sec:authorize="hasAuthority('ADMIN')">Add games</a>
+<br>
+
+<p th:if="${message}" th:text="${message}">Error message</p>
 
 <h2>Played Games</h2>
 <table>
@@ -23,7 +28,7 @@
 		<th>Visiting Team</th>
 		<th>Score</th>
 		<th>Score difference</th>
-		<th>Edit</th>
+		<th sec:authorize="isAuthenticated()">Edit</th>
 		<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
 	</tr>
 	<tr th:each = "game : ${games}">
@@ -35,7 +40,7 @@
 			<td th:text= "${game.visitingTeam?.name}"></td>
 			<td th:text= "${game.scoreHomeTeam} + '-' + ${game.scoreVisitingTeam}"></td>
 			<td th:text= "${game.scoreHomeTeam}-${game.scoreVisitingTeam}"></td>
-			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
+			<td sec:authorize="isAuthenticated()"><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 	</tr>
@@ -49,7 +54,7 @@
 		<th>Venue</th>
 		<th>Home Team</th>
 		<th>Visiting Team</th>
-		<th>Edit</th>
+		<th sec:authorize="isAuthenticated()">Edit</th>
 		<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
 
 	</tr>
@@ -60,7 +65,7 @@
 			<td th:text= "${game.venue}"></td>
 			<td th:text= "${game.homeTeam?.name}"></td>
 			<td th:text= "${game.visitingTeam?.name}"></td>
-			<td><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
+			<td sec:authorize="isAuthenticated()"><a th:href="@{/editgame/{id}(id=${game.id})}">E</a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}">x</a></td>
 		</th:block>
 
