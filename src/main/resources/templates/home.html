@@ -13,7 +13,9 @@
 	</form>
 		<a href="/login" sec:authorize="isAnonymous()"> Log in</a>
 		<br>
-<a href="/teams">Show all teams</a> <a href="/addgame" sec:authorize="hasAuthority('ADMIN')">Add games</a>
+<a href="/teams">Show all teams</a> 
+<a href="/addgame" sec:authorize="hasAuthority('ADMIN')">Add games</a> 
+<a href="/users" sec:authorize="hasAuthority('ADMIN')">Manage users</a>
 <br>
 
 <p th:if="${message}" th:text="${message}">Error message</p>

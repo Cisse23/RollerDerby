@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +13,6 @@ import cb.swd20.RollerDerby.webcontroller.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity
 public class WebSecurityConfig {
 
 	@Autowired
@@ -31,7 +29,7 @@ public class WebSecurityConfig {
 		http
 		.authorizeRequests()
 		.antMatchers("/", "/home", "/teams").permitAll()
-		.antMatchers("/delete/**", "/addteam", "/addgame").hasAuthority("ADMIN")
+		.antMatchers("/delete/**", "/addteam", "/addgame", "/deletegame/**", "/users", "/adduser", "/edituser/**", "/deleteuser/**").hasAuthority("ADMIN")
 		.antMatchers("/editteam/**", "/editgame/**").hasAnyAuthority("ADMIN", "USER")
 		.anyRequest().authenticated()
 		.and()
@@ -40,7 +38,7 @@ public class WebSecurityConfig {
 		.permitAll()
 		.and()
 	.logout()
-		//.logoutSuccessUrl("/")
+		.logoutSuccessUrl("/")
 		.permitAll()
 		.and()
 	.httpBasic();

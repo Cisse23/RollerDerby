@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Manage Users</title>
+</head>
+<body>
+<h1>All users</h1>
+<table>
+	<tr>
+		<th>Username</th>
+		<th>Role</th>
+		<th>Team</th>
+		<th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+		<th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+	</tr>
+	<tr th:each = "user : ${users}">
+		<td th:text= "${user.username}"></td> 
+		<td th:text= "${user.role}"></td>
+		<td th:text= "${user.team} ? ${user.team.name} : '' "></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edituser/{id}(id=${user.id})}">E</a>
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteuser/{id}(id=${user.id})}">x</a></td>
+		
+	</tr>
+</table>
+<a href="/adduser">Add User</a> <a href="/">return</a>
+</body>
+</html>
+
+
+<!-- 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	private Long id;
+	
+	//unique username
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
+	
+	@Column(name = "password", nullable = false)
+	private String passwordHash;
+	
+	@Column(name = "role", nullable = false)
+	private String role;
+	
+	//@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "team")
+	private Team team;
+ -->

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity (name="users")
 public class User {
@@ -19,6 +20,7 @@ public class User {
 	
 	//unique username
 	@Column(name = "username", nullable = false, unique = true)
+	@NotBlank(message = "Name is mandatory")
 	private String username;
 	
 	@Column(name = "password", nullable = false)

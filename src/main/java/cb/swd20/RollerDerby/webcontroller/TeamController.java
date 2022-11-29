@@ -2,7 +2,11 @@ package cb.swd20.RollerDerby.webcontroller;
 
 import java.security.Principal;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +46,7 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "/saveteam", method = RequestMethod.POST)
-	public String saveTeam(Team team) {
+	public String saveTeam(@NotBlank String name, @Size(min=3) String acronym, Team team) {
 		teamRepo.save(team);
 		return "redirect:teams";
 	}
@@ -79,7 +83,13 @@ public class TeamController {
 		return "redirect:../teams";
 	}
 	
-	
+	@Controller
+	public class Error implements ErrorController {
+		@RequestMapping("/error")
+		public String handleError() {
+			return "error";
+		}
+	}
 
 	
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Roller Derby Games | Add User</title>
+</head>
+<body>
+<h1>Add Game</h1>
+<div>
+
+	<form th:object="${user}" th:action="@{/saveuser}" action="#" method="post">
+		
+		<input type="hidden" th:field="*{id}" />
+		<br>
+		
+		<label for="username">Username</label>
+		<input type="text" id="username" th:field="*{username}" th:required="required"/>
+		
+		<!-- Team Selection -->
+		<label for="team">Team</label>
+		<select id="team" th:field="*{team}" class="form-control">
+			<option th:value="''" th:text="''"></option>
+			<option th:each="team: ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+		</select>
+		
+		<!-- Role Selection -->
+		<label for="role">Role</label>
+		<select id="role" th:field="*{role}" class="form-control">
+			<option th:value="USER" th:text="USER"></option>
+			<option th:value="ADMIN" th:text="ADMIN"></option>
+		</select>
+		
+		<br>	
+		<label for="password">Password</label>
+		<input type="password" id="passwordHash" th:field="*{passwordHash}" />
+		
+		<input type="submit" value="Save"></input>
+		
+	</form>
+	<a href="/users">return</a>
+</div>
+
+
+</body>
+</html>
+
+
+<!-- 
+{
+"username": "Pekka",
+"passwordHash": "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6",
+"role": "USER",
+"_links": {
+"self": {
+"href": "http://localhost:8080/api/users/2"
+},
+"user": {
+"href": "http://localhost:8080/api/users/2"
+},
+"team": {
+"href": "http://localhost:8080/api/users/2/team"
+}
+}
+}
+
+ -->

@@ -10,7 +10,7 @@
 
 	<form th:object="${team}" th:action="@{/saveteam}" action="#" method="post">
 		<label for="name">Team name</label>
-		<input type="text" id="name" th:field="*{name}" />
+		<input type="text" id="name" th:field="*{name}" th:required="required" />
 		
 		<label for="acronym">Acronym</label>
 		<input type="text" id="acronym" th:field="*{acronym}" />

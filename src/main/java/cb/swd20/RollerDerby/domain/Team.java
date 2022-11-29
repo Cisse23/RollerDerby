@@ -18,6 +18,7 @@ public class Team {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	//private String club;
+
 	private String name;
 	private String acronym;
 	private String city;
